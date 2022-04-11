@@ -1,0 +1,16 @@
+<nav>
+    <a [routerLink]="['/daily']" 
+       [queryParams]="{ city: cityInput.value }" 
+       [class.active]="isLinkActive('daily')"
+    >
+        daily
+    </a>
+    <a [routerLink]="['/hourly']" [queryParams]="{ city: cityInput.value }"
+       [class.active]="isLinkActive('hourly')"
+    >
+        hourly
+    </a>
+</nav>
+<form [formGroup]="searchForm" (ngSubmit)="submitCity()">
+    <input type="text" name="" id="" [formControl]="cityInput" />
+</form>
