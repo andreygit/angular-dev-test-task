@@ -4,7 +4,7 @@ import { DefaultUrlSerializer, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, of, switchMap } from 'rxjs';
 import { DAILY_ROUTE, HOURLY_ROUTE } from '../../app-routing.module';
-import { ICityCoords, OpenweathermapService, ERROR_CITY_NOT_FOUD } from '../../services/openweathermap.service';
+import { OpenweathermapService, ERROR_CITY_NOT_FOUD } from '../../services/openweathermap.service';
 import { AppState, getDailyRowByCityName, getHourlyRowByCityName } from '../../store';
 import { AddWeatherDailyAcition, AddWeatherHourlyAcition } from '../../store/weather.actions';
 import { IWeatherInfo, TemperatureData } from '../../store/weather.state';
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
 			this.store.select(getDailyRowByCityName(cityName)).pipe(
 			 	switchMap(row => {
 					if (!row) {
-						return this.openweathermap.getDailyCityWeather(cityName)
+						return this.openweathermap.getCityWeatherDaily(cityName)
 					} else {
 						return of(undefined)
 					}
@@ -69,16 +69,7 @@ export class HeaderComponent implements OnInit {
 			this.store.select(getHourlyRowByCityName(cityName)).pipe(
 				switchMap(row => {
 					if (!row) {
-						return this.openweathermap.getCoords(cityName).pipe(
-							switchMap((city: ICityCoords | undefined ) => {
-								if (city?.lat && city?.lon) {
-									return this.openweathermap.getHourly(city.lat, city.lon)
-								} else {
-									this.cityInput.setErrors({isWrong: true})
-									return of(undefined)
-								}
-							})
-						)
+						return this.openweathermap.getCityWeatherHourly(cityName)
 					} else {
 						return of(undefined)
 					}

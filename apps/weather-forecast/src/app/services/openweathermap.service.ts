@@ -75,7 +75,7 @@ export class OpenweathermapService {
 			)
 	}
 
-	public getDailyCityWeather(cityName: string) {
+	public getCityWeatherDaily(cityName: string) {
 		return this.getCoords(cityName).pipe(
 			switchMap((city: ICityCoords | undefined) => {
 				if (city?.lat && city?.lon) {
@@ -87,7 +87,7 @@ export class OpenweathermapService {
 		)
 	}
 
-	public getDailyWeatherHourly(cityName: string) {
+	public getCityWeatherHourly(cityName: string) {
 		return this.getCoords(cityName).pipe(
 			switchMap((city: ICityCoords | undefined) => {
 				if (city?.lat && city?.lon) {
