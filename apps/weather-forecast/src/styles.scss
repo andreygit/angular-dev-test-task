@@ -1,27 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
-/* Navigation link styles */
+main {
+	margin-top: 30px;
+}
 nav a {
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-right: 10px;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #e8e8e8;
-    color: #3d3d3d;
-    border-radius: 4px;
-  }
-  
-  nav a:hover {
-    color: white;
-    background-color:  #42545C;
-  }
-  nav a.active {
-    background-color: black;
-    color: white;
-  }
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #e8e8e8;
+  color: #3d3d3d;
+  border-radius: 4px;
+}
 
-  input[type="text"] {
-    box-sizing: border-box;
-    width: 100%;
-    padding: .5rem;
+nav a:hover {
+  color: white;
+  background-color:  #42545C;
+}
+
+nav a.active {
+  background-color: black;
+  color: white;
+}
+
+input[type="text"], button {
+  box-sizing: border-box;
+  padding: .5rem;
+}
+
+table th, table td{
+  padding: 6px 13px;
+  border: 1px solid #d0d7de
+}
+
+table {
+  th {
+    font-weight: 600;
   }
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+}
+
+.error-text {
+  color: red;
+}
+  
+.mt-30 {
+  margin-top: 30px;
+}

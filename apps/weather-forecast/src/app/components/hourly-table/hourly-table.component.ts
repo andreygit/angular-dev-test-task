@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState, selectWeatherHourly } from '../../store';
+import { IWeatherRow } from '../../store/weather.state';
 
 @Component({
-  selector: 'bp-hourly-table',
-  templateUrl: './hourly-table.component.html'
+	selector: 'bp-hourly-table',
+	templateUrl: './hourly-table.component.html'
 })
-export class HourlyTableComponent implements OnInit {
-  public city: string = ""
+export class HourlyTableComponent {
 
-  constructor(private route: ActivatedRoute) { }
+	public hourlyRows$: Observable<Array<IWeatherRow>>
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.city = params.city 
-    })
-  }
+	constructor(private store: Store<AppState>) {
+		this.hourlyRows$ = this.store.select(selectWeatherHourly)
+	}
+
 }

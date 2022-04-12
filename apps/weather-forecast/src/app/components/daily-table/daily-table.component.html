@@ -1,3 +1,14 @@
-<p>daily-table works!</p>
-
-{{ city }} 
+<table *ngIf="(dailyRows$ | async)?.[0] as firstRow" >
+    <thead>
+        <tr>
+            <th> City Name </th>
+            <th *ngFor="let temperature of firstRow.temperature"> {{ temperature.date | date: "EEEEEE" }} </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of dailyRows$ | async"> 
+            <td> {{ row.city }} </td>
+            <td *ngFor="let temperature of row.temperature"> {{ temperature.temperature }}° </td>
+        </tr>
+    </tbody>
+</table>

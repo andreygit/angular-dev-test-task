@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState, selectWeatherDaily } from '../../store';
+import { IWeatherRow } from '../../store/weather.state';
 
 @Component({
-  selector: 'bp-daily-table',
-  templateUrl: './daily-table.component.html'
+	selector: 'bp-daily-table',
+	templateUrl: './daily-table.component.html'
 })
-export class DailyTableComponent implements OnInit {
-  public city: string = ""
+export class DailyTableComponent {
+	public dailyRows$: Observable<Array<IWeatherRow>>
 
-  constructor(public route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.city = params.city 
-    })
-  }
+	constructor(private store: Store<AppState>) {
+		this.dailyRows$ = this.store.select(selectWeatherDaily)
+	}
 }

@@ -1,16 +1,18 @@
 <nav>
-    <a [routerLink]="['/daily']" 
-       [queryParams]="{ city: cityInput.value }" 
-       [class.active]="isLinkActive('daily')"
-    >
-        daily
-    </a>
-    <a [routerLink]="['/hourly']" [queryParams]="{ city: cityInput.value }"
-       [class.active]="isLinkActive('hourly')"
-    >
-        hourly
-    </a>
+	<a [routerLink]="['/' + DAILY_ROUTE]" [queryParams]="{ city: cityInput.value }" [class.active]="isLinkActive(DAILY_ROUTE)">
+		daily
+	</a>
+	<a [routerLink]="['/' + HOURLY_ROUTE]" [queryParams]="{ city: cityInput.value }" [class.active]="isLinkActive(HOURLY_ROUTE)">
+		hourly
+	</a>
 </nav>
 <form [formGroup]="searchForm" (ngSubmit)="submitCity()">
-    <input type="text" name="" id="" [formControl]="cityInput" />
+	<div class="mt-30">
+		<input type="text" [formControl]="cityInput" />
+		<button>search</button>
+	</div>
+	<div *ngIf="cityInput.errors && cityInput.errors['isWrong']" class="error-text">
+		City not found
+	</div>
+	
 </form>

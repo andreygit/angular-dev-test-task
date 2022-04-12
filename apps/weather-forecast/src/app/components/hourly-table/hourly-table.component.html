@@ -1,2 +1,14 @@
-<p>hourly-table works!</p>
-{{ city }} 
+<table *ngIf="(hourlyRows$ | async)?.[0] as firstRow">
+	<thead>
+		<tr>
+			<th> City Name </th>
+			<th *ngFor="let temperature of firstRow.temperature"> {{ temperature.date | date: 'HH:mm' }} </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let row of hourlyRows$ | async">
+			<td> {{ row.city }} </td>
+			<td *ngFor="let temperature of row.temperature"> {{ temperature.temperature }}° </td>
+		</tr>
+	</tbody>
+</table>
